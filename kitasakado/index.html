@@ -30,6 +30,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
 .hero{position:relative;height:420px;overflow:hidden;background:#2a2a24}
 .mos{position:absolute;inset:0;display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:1fr;grid-auto-flow:dense;gap:2px}
 .mos .m{overflow:hidden;position:relative;background:#3a3a32}
+.mos .m b{position:absolute;left:6px;bottom:6px;z-index:1;font:700 13px/1.3 var(--sa);color:#fff;background:rgba(0,0,0,.6);padding:3px 7px;border-radius:4px}
 .m.b{grid-column:span 2;grid-row:span 2}.m.tall{grid-row:span 2}.m.wide{grid-column:span 2}
 .m:nth-child(1) img{animation:kb 22s ease-in-out infinite alternate}
 @keyframes kb{to{transform:scale(1.12) translate(-2%,-2%)}}
@@ -51,11 +52,11 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
 .tile .open{position:absolute;inset:0;width:100%;text-align:left}
 .tile .open img{transition:transform .5s}
 .tile .open:hover img{transform:scale(1.04)}
-.tx{position:absolute;left:0;right:0;bottom:0;padding:48px 12px 11px;background:linear-gradient(transparent,rgba(12,10,6,.86));display:flex;flex-direction:column;color:#fff}
+.tx{position:absolute;left:0;right:0;bottom:0;padding:9px 12px 10px;background:rgba(14,12,8,.82);display:flex;flex-direction:column;gap:1px;color:#fff;z-index:1}
 .tx small{font:700 13px/1.4 var(--sa);color:#FFB98F;letter-spacing:.04em}
-.tx strong{font:800 17px/1.35 var(--mi);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.tx strong{font:800 19px/1.3 var(--mi);color:#fff}
 .tx em{font:500 13px/1.4 var(--sa);font-style:normal;color:#eee6da;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.tile.wide .tx{padding:64px 14px 14px}.tile.wide .tx strong{font-size:23px}.tile.wide .tx em{font-size:14px}
+.tile.wide .tx{padding:11px 14px 12px}.tile.wide .tx strong{font-size:25px}.tile.wide .tx em{font-size:14px}
 .fl{position:absolute;top:10px;left:10px;font:400 14px/1 var(--dot);color:#fff;background:rgba(0,0,0,.62);padding:7px 9px;border-radius:4px;letter-spacing:.04em;z-index:2}
 .fl.on{background:var(--open)}
 .tile::after{content:"";position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 0 0 var(--heart);transition:box-shadow .2s;z-index:3}
@@ -170,7 +171,7 @@ const today=s=>{const{d}=now(),t=s.hw[d];return DAYS[d]+'曜 '+(t?t.map(([a,b])=
 const fb=`this.onerror=null;this.style.display='none'`;
 // hero mosaic
 const cls=['b','s','s','tall','s','s','b','s','wide'];
-document.getElementById('mos').innerHTML=S.map((s,i)=>`<i class="m ${cls[i]}"><img src="${s.img}" alt="" onerror="${fb}"></i>`).join('');
+document.getElementById('mos').innerHTML=S.map((s,i)=>`<i class="m ${cls[i]}"><img src="${s.img}" alt="" onerror="${fb}"><b>${esc(s.n)}</b></i>`).join('');
 for(const a of['walk','car'])document.getElementById('g-'+a).innerHTML=S.filter(s=>s.a===a).map(s=>{const x=st(s);return`
 <article class="tile${s.w?' wide':''}" data-id="${s.id}"><button class="open" type="button" data-pop="p-${s.id}" aria-label="${esc(s.n)}のくわしい情報"><img src="${s.img}" alt="" loading="lazy" onerror="${fb}"><span class="tx"><small>${esc(s.g)}</small><strong>${esc(s.n)}</strong><em>${esc(s.p)}</em></span></button>
 <span class="fl${x.on?' on':''}" data-st="${s.id}">${esc(x.l)}</span>
